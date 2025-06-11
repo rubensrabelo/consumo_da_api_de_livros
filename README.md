@@ -3,8 +3,6 @@ classDiagram
   direction LR
   class Book {
     - title: String
-    - author: Author
-    - language: String
     - numberOfDownloads: int
   }
 
