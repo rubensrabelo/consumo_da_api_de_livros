@@ -2,5 +2,5 @@ package com.course.api.book.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Author extends JpaRepository<Author, Long> {
+public interface AuthorRepository extends JpaRepository<AuthorRepository, Long> {
 }
