@@ -11,32 +11,31 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
     private int numberOfDownloads;
 
     public Book() {
     }
 
-    public Book(Long id, String name, int numberOfDownloads) {
-        this.id = id;
-        this.name = name;
+    public Book(String name, int numberOfDownloads) {
+        this.title = name;
         this.numberOfDownloads = numberOfDownloads;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getNumberOfDownloads() {
@@ -51,11 +50,11 @@ public class Book {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return numberOfDownloads == book.numberOfDownloads && Objects.equals(id, book.id) && Objects.equals(name, book.name);
+        return numberOfDownloads == book.numberOfDownloads && Objects.equals(id, book.id) && Objects.equals(title, book.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, numberOfDownloads);
+        return Objects.hash(id, title, numberOfDownloads);
     }
 }
