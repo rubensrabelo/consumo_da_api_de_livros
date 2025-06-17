@@ -1,10 +1,12 @@
 package com.course.api.book.display;
 
 import com.course.api.book.data.dto.ApiResponse;
+import com.course.api.book.data.dto.BookDTO;
 import com.course.api.book.repository.AuthorRepository;
 import com.course.api.book.repository.BookRepository;
 import com.course.api.book.repository.LanguageRepository;
 import com.course.api.book.service.ApiConsumption;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.http.HttpClient;
@@ -62,9 +64,13 @@ public class Display {
         try {
             var json = consumption.getData(Address + "?search=dom+casmurro");
 
-            ApiResponse response = objectMapper.readValue(json, ApiResponse.class);
+            ApiResponse<BookDTO> response = objectMapper.readValue(
+                    json, new TypeReference<ApiResponse<BookDTO>>() {}
+            );
 
-            System.out.println(response);
+            for(BookDTO dto : response.results()) {
+                System.out.println(dto);
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }

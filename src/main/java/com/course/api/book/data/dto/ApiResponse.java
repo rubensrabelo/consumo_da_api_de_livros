@@ -4,7 +4,9 @@ import com.course.api.book.model.Book;
 
 import java.util.List;
 
-public record ApiResponse(
-        List<Book> results
-) {
-}
+public record ApiResponse<T>(
+        int count,
+        String next,
+        String previous,
+        List<BookDTO> results
+) {}
