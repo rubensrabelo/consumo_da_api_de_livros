@@ -2,6 +2,8 @@ package com.course.api.book.display;
 
 import com.course.api.book.data.dto.ApiResponse;
 import com.course.api.book.data.dto.BookDTO;
+import com.course.api.book.model.Author;
+import com.course.api.book.model.Language;
 import com.course.api.book.repository.AuthorRepository;
 import com.course.api.book.repository.BookRepository;
 import com.course.api.book.repository.LanguageRepository;
@@ -10,7 +12,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.http.HttpClient;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Display {
     private Scanner input = new Scanner(System.in);
@@ -69,7 +73,14 @@ public class Display {
             );
 
             for(BookDTO dto : response.results()) {
-                System.out.println(dto);
+                List<Author> authors = dto.authors().stream()
+                        .map(a -> new Author(a.name(), a.birthYear(), a.deathYear()))
+                        .map(authorRepository::save)
+                        .toList();
+                List<Language> languages = dto.languages().stream()
+                        .map(Language::new)
+                        .map(languageRepository::save)
+                        .toList();
             }
         } catch(Exception e) {
             e.printStackTrace();
