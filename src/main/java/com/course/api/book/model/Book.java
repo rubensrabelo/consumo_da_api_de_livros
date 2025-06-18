@@ -2,7 +2,7 @@ package com.course.api.book.model;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_books")
@@ -13,6 +13,22 @@ public class Book {
     private Long id;
     private String title;
     private int numberOfDownloads;
+
+    @ManyToMany
+    @JoinTable(
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    List<Author> authors = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "book_language",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_name")
+    )
+    Set<Language> languages = new HashSet<>();
 
     public Book() {
     }

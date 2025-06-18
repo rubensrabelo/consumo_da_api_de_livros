@@ -2,6 +2,8 @@ package com.course.api.book.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,11 +15,13 @@ public class Language {
     private Long id;
     private String name;
 
+    @ManyToMany(mappedBy = "languages")
+    private List<Book> books = new ArrayList<>();
+
     public Language() {
     }
 
-    public Language(Long id, String name) {
-        this.id = id;
+    public Language(String name) {
         this.name = name;
     }
 

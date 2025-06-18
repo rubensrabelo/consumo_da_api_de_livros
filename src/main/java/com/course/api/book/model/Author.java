@@ -2,6 +2,8 @@ package com.course.api.book.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,11 +17,13 @@ public class Author {
     private int birthYear;
     private int deathYear;
 
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books = new ArrayList<>();
+
     public Author() {
     }
 
-    public Author(Long id, String name, int birthYear, int deathYear) {
-        this.id = id;
+    public Author(String name, int birthYear, int deathYear) {
         this.name = name;
         this.birthYear = birthYear;
         this.deathYear = deathYear;
